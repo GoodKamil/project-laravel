@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Home\MainPage;
 use Illuminate\Support\Facades\Route;
@@ -39,3 +40,15 @@ Route::post('/store',[UserController::class,'store'])
 
 Route::post('/update/{idU}',[UserController::class,'update'])
     ->name('admin.update');
+
+Route::get('/taskCreate',[TaskController::class,'create'])
+    ->name('admin.task.create');
+Route::post('/taskStore',[TaskController::class,'store'])
+    ->name('admin.task.store');
+Route::get('/taskShow',[TaskController::class,'index'])
+    ->name('admin.task.index');
+Route::get('/taskUpdate/{idT}',[TaskController::class,'edit'])
+    ->name('admin.task.edit');
+Route::post('/taskUpdate/{idT}',[TaskController::class,'update'])
+    ->name('admin.task.update');
+

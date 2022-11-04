@@ -17,4 +17,9 @@ class Users extends Model
     {
         return $this->belongsTo(Positions::class,'position','id_P');
     }
+
+    public function tasks()
+    {
+        return $this->belongsTo(Tasks::class,'id_U','id_U');
+    }
 }

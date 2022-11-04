@@ -25,7 +25,7 @@ class StorePostRequestAddUser extends FormRequest
     public function rules()
     {
         return [
-            'user_email'=>'required|string|unique:email_users,email',
+            'user_email'=>'required|string|email:rfc,dns|unique:email_users,email',
             'position'=>'required'
         ];
     }
@@ -33,8 +33,9 @@ class StorePostRequestAddUser extends FormRequest
     public function messages()
     {
         return [
-            'user_email.required'=>'Pole email nie może być puste',
-            'user_email.unique'=>'Adres email istnieje już w bazie danych',
+            'user_email.required'=>'Pole e-mail nie może być puste',
+            'user_email.email'=>'Zły format adres e-mail',
+            'user_email.unique'=>'Adres e-mail istnieje już w bazie danych',
             'position.required'=>'Proszę wybrać stanowisko'
         ];
     }

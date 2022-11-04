@@ -81,7 +81,6 @@ class UserController extends Controller
 
     public function delete():view
     {
-
         return view('admin.list',[
             'users'=>$this->repository->all()
         ]);

@@ -7,6 +7,7 @@
         <meta name="description" content=""/>
         <script src="https://kit.fontawesome.com/5244237eec.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script async src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
        @vite(['resources/css/app.css']);
     </head>
     <body class="sb-nav-fixed">
