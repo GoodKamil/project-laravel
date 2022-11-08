@@ -11,7 +11,7 @@ class Tasks extends Model
     protected $primaryKey = 'id_T';
     protected $table='user_tasks';
     protected $fillable = [
-        'id_U', 'Title', 'Description', 'DateFrom','DateTo','priority'
+        'id_U', 'Title', 'Description', 'DateFrom','DateTo','priority','whoAdd'
     ];
 
     public function users()

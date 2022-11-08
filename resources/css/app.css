@@ -25819,6 +25819,10 @@ button.bg-dark:focus {
 .my-5 {
     margin-top: 3rem !important;
 }
+.mt-6
+{
+    margin-top:4rem !important;
+}
 
 .mr-5,
 .mx-5 {
@@ -34660,5 +34664,21 @@ body {
     background-color: #e9ecef;
 }
 
-
+.color_link
+{
+    color:var(--gray-dark);
+}
+.color_link:hover
+{
+    color:var(--gray-dark);
+}
+.border__menu{
+    border-bottom: 1px solid var(--gray-dark);
+}
+.bacground_menu_home
+{
+    background-color: #f9f5f5;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
 

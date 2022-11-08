@@ -17,12 +17,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $user)
+                        @forelse($users as $user)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->first_name }}</td>
                                 <td>{{ $user->last_name }}</td>
-                                <td>{{ $user->email_user }}</td>
+                                <td>{{ $user->email_users->email }}</td>
                                 <td>{{ $user->positions->position }}</td>
                                 <td><div>
                                         <a href="{{ route('admin.edit', ['idU' => $user->id_U]) }}"><button type="button" class="btn btn-light">Edytuj</button></a>
@@ -31,7 +31,9 @@
 
                                     </div></td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr><td colspan="6">Brak informacji o użytkownikach</td></tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

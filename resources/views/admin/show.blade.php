@@ -8,7 +8,7 @@
             <ul>
                 <li>Imię: {{ $user->first_name }}</li>
                 <li>Nazwisko: {{ $user->last_name }}</li>
-                <li>Email: {{ $user->email_user }}</li>
+                <li>Email: {{ $user->email_users->email }}</li>
                 <li>Stanowisko: {{ $user->positions->position }}</li>
             </ul>
 

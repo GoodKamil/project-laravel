@@ -10,9 +10,10 @@ use App\Models\Positions;
 use App\Repository\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
-class UserController extends Controller
+class UserController
 {
     private UserRepository $repository;
     public function __construct(UserRepository $repository)
@@ -24,7 +25,7 @@ class UserController extends Controller
     {
 
        return view('admin.index',[
-         'users'=>$this->repository->all()
+         'users'=>$this->repository->all(auth::id())
        ]);
     }
 
@@ -82,7 +83,7 @@ class UserController extends Controller
     public function delete():view
     {
         return view('admin.list',[
-            'users'=>$this->repository->all()
+            'users'=>$this->repository->all(auth::id())
         ]);
     }
 

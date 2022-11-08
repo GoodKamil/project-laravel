@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StorePostRequestAddTask;
 use App\Repository\TasksRepository;
 use App\Repository\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class TaskController extends Controller
@@ -29,7 +30,7 @@ class TaskController extends Controller
     public function create():view
     {
         return view('admin.task.create',
-        ['users'=>$this->userRepository->all()]
+        ['users'=>$this->userRepository->all(Auth::id())]
     );
     }
 
@@ -43,7 +44,7 @@ class TaskController extends Controller
     public function edit(int $idT):view
     {
         $task=$this->tasksRepository->get($idT);
-        $users=$this->userRepository->all();
+        $users=$this->userRepository->all(Auth::id());
         return view('admin.task.edit',['task'=>$task,'users'=>$users]);
     }
 
@@ -64,7 +65,8 @@ class TaskController extends Controller
             'Description'=>$request->description,
             'DateFrom'=>$request->dateOd,
             'DateTo'=>$request->dateDo,
-            'priority'=>$request->boolean('priority')
+            'priority'=>$request->boolean('priority'),
+            'whoAdd'=>Auth::id(),
         ];
     }
 }

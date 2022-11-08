@@ -9,7 +9,7 @@ class EmailUsers extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'email', 'id_P','created_at'
+        'email', 'id_P','created_at','used'
     ];
     protected $primaryKey = 'id_E';
 

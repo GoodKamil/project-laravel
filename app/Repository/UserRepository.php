@@ -14,18 +14,33 @@ class UserRepository
         $this->userModel = $userModel;
     }
 
-    public function all()
+    public function all(int $idUsera)
     {
       return $this->userModel
           ->with('positions')
+          ->with('email_users')
+          ->where('id_U','!=' ,$idUsera)
           ->orderBy('created_at','desc')
           ->get();
     }
+
+    public function allEmployee()
+    {
+        return $this->userModel
+                 ->whereHas('positions',function($query) {
+                     $query->where('role', 1);
+                 })
+                 ->with('email_users')
+                 ->orderBy('created_at','desc')
+                 ->get();
+    }
+
 
     public function get(int $id)
     {
         return $this->userModel
             ->with('positions')
+            ->with('email_users')
             ->find($id);
     }
 
@@ -34,5 +49,12 @@ class UserRepository
         $this->userModel
             ->find($id)
             ->update($params);
+    }
+
+    public function insert(array $params)
+    {
+        $this->userModel
+            ->fill($params)
+            ->save();
     }
 }

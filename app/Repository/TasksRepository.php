@@ -24,6 +24,14 @@ class TasksRepository
             ->get();
     }
 
+    public function allEmployee(int $idUsera)
+    {
+        return $this->tasksModel
+            ->where('whoAdd',$idUsera)
+            ->orderBy('created_at','desc')
+            ->get();
+    }
+
     public function get(int $id)
     {
         return $this->tasksModel
