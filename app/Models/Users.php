@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class Users extends Authenticatable
 {
@@ -26,6 +27,21 @@ class Users extends Authenticatable
 
     public function email_users()
     {
-        return $this->belongsTo(EmailUsers::class,'email_user','id_E');
+        return $this->hasOne(EmailUsers::class,'id_E','email_user');
     }
+    public function users_data()
+    {
+        return $this->hasOne(UserData::class,'id_U','id_U');
+    }
+
+    public function isAdmin()
+    {
+        return $this->positions()->where('role',3)->exists();
+    }
+
+    public function isDataUser() : bool
+    {
+        return !is_null($this->users_data);
+    }
+
 }

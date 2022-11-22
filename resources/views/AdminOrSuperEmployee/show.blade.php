@@ -10,9 +10,17 @@
                 <li>Nazwisko: {{ $user->last_name }}</li>
                 <li>Email: {{ $user->email_users->email }}</li>
                 <li>Stanowisko: {{ $user->positions->position }}</li>
+                @if($user->isDataUser())
+                    <li>Kraj zamieszkania: {{ $user->users_data->country }}</li>
+                    <li>Miejsce zamieszkania: {{ $user->users_data->city }}</li>
+                    <li>Kod pocztowy: {{ $user->users_data->zip_code }}</li>
+                    <li>Adres zamieszkania: {{ $user->users_data->address }}</li>
+                    <li>Województwo: {{ $user->users_data->province }}</li>
+
+                @endif
             </ul>
 
-            <a href="{{ route('admin.index') }}" class="btn btn-light">Lista użytkowników</a>
+            <a href="{{ route('AdminOrSuperEmployee.index') }}" class="btn btn-light">Lista użytkowników</a>
         </div>
         @else
             <h5 class="card-header">Brak danych do wyświetlenia</h5>

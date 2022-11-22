@@ -62,7 +62,11 @@
                     @section('sidebar')
                         <div class="sb-sidenav-menu">
                             <div class="nav">
-                                @includeIf(\App\Enum\UserRole::NUMBERTYPES[Auth::user()->positions->role-1].'.menu.sidebar')
+                                @can('isAdminOrSuperEmployee')
+                                    @includeIf('AdminOrSuperEmployee.menu.sidebar')
+                                @else
+                                    @includeIf('employee.menu.sidebar')
+                                @endcan
                             </div>
                         </div>
                         <div class="sb-sidenav-footer">

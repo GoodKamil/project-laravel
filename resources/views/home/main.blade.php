@@ -2,5 +2,9 @@
 
 @section('content')
     <h2 class="mt-4 ">Kontekst zalogowane użytkownika</h2>
-    @includeIf(\App\Enum\UserRole::NUMBERTYPES[Auth::user()->positions->role-1].'.menu.dashboardMenu')
+    @can('isAdminOrSuperEmployee')
+        @includeIf('AdminOrSuperEmployee.menu.dashboardMenu')
+    @else
+        @includeIf('employee.menu.dashboardMenu')
+    @endcan
 @endsection

@@ -5,7 +5,7 @@
         @if(!empty($user))
             <h5 class="card-header">Edycja użytkownika</h5>
             <div class="card-body">
-                <form action="{{route('admin.update',['idU' => $user->id_U])}}" method="post">
+                <form action="{{route('AdminOrSuperEmployee.update',['idU' => $user->id_U])}}" method="post">
                     @csrf
                     <div class="mb-3">
                         <label for="firstName" class="form-label">Imie</label>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary mr-3">Edytuj</button>
-                        <button type="submit"  formaction="{{ route('admin.index') }}" formmethod="GET" class="btn btn-light">Powrót</button>
+                        <button type="submit"  formaction="{{ route('AdminOrSuperEmployee.index') }}" formmethod="GET" class="btn btn-light">Powrót</button>
                     </div>
                 </form>
 

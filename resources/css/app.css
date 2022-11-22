@@ -4938,6 +4938,9 @@ input[type=button].btn-block {
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
 }
+.card.borderCard{
+    border:1px solid #c10202 !important;
+}
 
 .card > hr {
     margin-right: 0;
@@ -34680,5 +34683,8 @@ body {
     background-color: #f9f5f5;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+}
+.display-form{
+    display: none;
 }
 

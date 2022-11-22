@@ -15,6 +15,6 @@ class EmailUsers extends Model
 
     public function users()
     {
-//        return $this->hasMany(Users::class,'position','id_P');
+        return $this->hasOne(Users::class);
     }
 }

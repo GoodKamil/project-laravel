@@ -18,4 +18,8 @@ class Tasks extends Model
     {
         return $this->hasMany(Users::class,'id_U','id_U');
     }
+    public function usersAdd()
+    {
+        return $this->hasMany(Users::class,'id_U','whoAdd');
+    }
 }

@@ -4,7 +4,7 @@
     <div class="card">
         <h5 class="card-header">Dodaj zadanie</h5>
         <div class="card-body">
-            <form action="{{route('admin.task.store')}}" method="post">
+            <form action="{{route('AdminOrSuperEmployee.task.store')}}" method="post">
                 @csrf
                 <div class="mb-3">
                     <label for="selectUser" class="form-label">Wybierz pracownika:</label>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary mr-3">Dodaj</button>
-                    <button type="submit"  formaction="{{ route('admin.index') }}" formmethod="GET" class="btn btn-light">Powrót</button>
+                    <button type="submit"  formaction="{{ route('AdminOrSuperEmployee.index') }}" formmethod="GET" class="btn btn-light">Powrót</button>
                 </div>
             </form>
 

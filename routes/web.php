@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\TaskController;
-use App\Http\Controllers\SuperEmployee\TaskController as EmployeeTask;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\SuperEmployee\UserController as EmployeeUser;
+use App\Http\Controllers\AdminOrSuperEmployee\TaskController;
+use App\Http\Controllers\AdminOrSuperEmployee\UserController;
+use App\Http\Controllers\Users\UserDataController;
+use App\Http\Controllers\Employee\UserController as Employee;
+use App\Http\Controllers\Employee\TaskController as EmployeeTasks;
 use App\Http\Controllers\Auth\CheckEmailController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Home\MainPage;
@@ -22,49 +23,61 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['middleware'=>['auth']],function(){
-    Route::group(['middleware'=>['can:isAdmin']],function(){
+    Route::group(['middleware'=>['can:isAdminOrSuperEmployee']],function(){
         Route::get('/user',[UserController::class,'index'])
-            ->name('admin.index');
-        Route::get('/edit/{idU}',[UserController::class,'edit'])
-            ->name('admin.edit');
+            ->name('AdminOrSuperEmployee.index');
         Route::get('/show/{idU}',[UserController::class,'show'])
-            ->name('admin.show');
-        Route::get('/delete',[UserController::class,'delete'])
-            ->name('admin.delete');
+            ->name('AdminOrSuperEmployee.show');
         Route::get('/create',[UserController::class,'create'])
-            ->name('admin.addUser');
+            ->name('AdminOrSuperEmployee.addUser');
         Route::post('/store',[UserController::class,'store'])
-            ->name('admin.store');
+            ->name('AdminOrSuperEmployee.store');
         Route::post('/update/{idU}',[UserController::class,'update'])
-            ->name('admin.update');
+            ->name('AdminOrSuperEmployee.update');
         Route::get('/taskStore',[TaskController::class,'create'])
-            ->name('admin.task.create');
+            ->name('AdminOrSuperEmployee.task.create');
         Route::post('/taskStore',[TaskController::class,'store'])
-            ->name('admin.task.store');
+            ->name('AdminOrSuperEmployee.task.store');
         Route::get('/taskShow',[TaskController::class,'index'])
-            ->name('admin.task.index');
+            ->name('AdminOrSuperEmployee.task.index');
         Route::get('/taskUpdate/{idT}',[TaskController::class,'edit'])
-            ->name('admin.task.edit');
+            ->name('AdminOrSuperEmployee.task.edit');
         Route::post('/taskUpdate/{idT}',[TaskController::class,'update'])
-            ->name('admin.task.update');
+            ->name('AdminOrSuperEmployee.task.update');
+        Route::get('/edit/{idU}',[UserController::class,'edit'])
+            ->name('AdminOrSuperEmployee.edit');
     });
 
-    Route::group(['middleware'=>['can:isSuperEmployee']],function(){
-        Route::get('/task',[EmployeeTask::class,'index'])
-            ->name('super.task.index');
-        Route::get('/taskCreate',[EmployeeTask::class,'create'])
-            ->name('super.task.create');
-        Route::post('/taskCreate',[EmployeeTask::class,'store'])
-            ->name('super.task.store');
-        Route::get('/users',[EmployeeUser::class,'index'])
-            ->name('super.users.index');
-
+    Route::group(['middleware'=>['can:isSuperEmployee']],function() {
+        Route::get('/delete', [UserController::class, 'delete'])
+            ->name('AdminOrSuperEmployee.delete');
     });
+
+
+   Route::group(['middleware'=>['can:isEmployee']],function(){
+      Route::get('/userTasks',[EmployeeTasks::class,'index'])
+          ->name('employee.task.index');
+       Route::get('/showTask/{id}',[EmployeeTasks::class,'show'])
+           ->name('employee.task.show');
+       Route::post('/handOverTheTask',[EmployeeTasks::class,'handOverTheTask'])
+           ->name('employee.task.handOverTheTask');
+   });
+
+
+    Route::get('/showProfile',[UserDataController::class,'show'])
+        ->name('users.data.show');
+    Route::get('/userDataShow',[UserDataController::class,'updateDataUser'])
+        ->name('users.data.updateDataUser');
+    Route::post('/userDataShow',[UserDataController::class,'doUpdateDataUser'])
+        ->name('users.data.doUpdateDataUser');
+    Route::post('/createUserDataShow',[UserDataController::class,'store'])
+        ->name('users.data.store');
+    Route::get('/createUserDataShow',[UserDataController::class,'create'])
+        ->name('users.data.createDataUser');
 
 
     Route::get('/', [MainPage::class,'__invoke'])
-        ->name('home.mainPage')
-        ->middleware('auth');
+        ->name('home.mainPage');
 });
 
 

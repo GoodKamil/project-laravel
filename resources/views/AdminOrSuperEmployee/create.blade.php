@@ -4,7 +4,7 @@
     <div class="card">
             <h5 class="card-header">Dodaj użytkownika</h5>
             <div class="card-body">
-                <form action="{{route('admin.store')}}" method="post">
+                <form action="{{route('AdminOrSuperEmployee.store')}}" method="post">
                     @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">Adres E-mail</label>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary mr-3">Dodaj</button>
-                        <button type="submit"  formaction="{{ route('admin.index') }}" formmethod="GET" class="btn btn-light">Powrót</button>
+                        <button type="submit"  formaction="{{ route('AdminOrSuperEmployee.index') }}" formmethod="GET" class="btn btn-light">Powrót</button>
                     </div>
                 </form>
 

@@ -3,22 +3,26 @@
     Panel
 </a>
 <div class="sb-sidenav-menu-heading">Użytkownicy</div>
-<a class="nav-link" href="{{route('admin.index')}}">
+<a class="nav-link" href="{{route('AdminOrSuperEmployee.index')}}">
     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
     Użytkownicy
 </a>
-<a class="nav-link" href="{{route('admin.task.index')}}">
+<a class="nav-link" href="{{route('AdminOrSuperEmployee.task.index')}}">
     <div class="sb-nav-link-icon"><i class="fas fa-clipboard"></i></div>
     Zadania
+</a>
+<a class="nav-link" href="{{route('users.data.show')}}">
+    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+    Twój profil
 </a>
 
 
 <div class="sb-sidenav-menu-heading">Operacje</div>
-<a class="nav-link" href="{{route('admin.addUser')}}">
+<a class="nav-link" href="{{route('AdminOrSuperEmployee.addUser')}}">
     <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
     Dodaj użytkownika
 </a>
-<a class="nav-link" href="{{route('admin.task.create')}}">
+<a class="nav-link" href="{{route('AdminOrSuperEmployee.task.create')}}">
     <div class="sb-nav-link-icon"><i class="fas fa-tasks"></i></div>
     Dodaj zadanie
 </a>
@@ -27,7 +31,8 @@
     Wyślij wiadomość
 </a>
 
-<a class="nav-link" href="#">
+<a class="nav-link" href="#"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
     <div class="sb-nav-link-icon"><i class="fas fa-sign"></i></div>
     Wyloguj się
 </a>
+

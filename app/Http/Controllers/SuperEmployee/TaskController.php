@@ -27,8 +27,18 @@ class TaskController extends  Controller
 
     public function create()
     {
+        dd($this->getUsers());
         return view('superemployeer.task.create',
-            ['users'=>$this->userRepository->all(auth::id())]);
+            ['users'=>$this->getUsers()]);
+    }
+
+    public function getUsers()
+    {
+        if(Auth::user()?->isAdmin())
+        {
+            return $this->userRepository->all(auth::id());
+        }
+        return $this->userRepository->allEmployee();
     }
 
     public function store(StorePostRequestAddTask $request)

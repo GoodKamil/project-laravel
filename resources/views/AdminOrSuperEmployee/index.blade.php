@@ -25,9 +25,11 @@
                                 <td>{{ $user->email_users->email }}</td>
                                 <td>{{ $user->positions->position }}</td>
                                 <td><div>
-                                        <a href="{{ route('admin.edit', ['idU' => $user->id_U]) }}"><button type="button" class="btn btn-light">Edytuj</button></a>
-                                        <a href="{{ route('admin.show', ['idU' => $user->id_U]) }}"><button type="button" class="btn btn-info">Szczegóły</button></a>
-                                        <a href="{{ route('admin.delete', ['idU' => $user->id_U]) }}"><button type="button" class="btn btn-danger">Usuń</button></a>
+                                        <a href="{{ route('AdminOrSuperEmployee.show', ['idU' => $user->id_U]) }}"><button type="button" class="btn btn-info">Szczegóły</button></a>
+                                        @can('isAdmin')
+                                        <a href="{{ route('AdminOrSuperEmployee.edit', ['idU' => $user->id_U]) }}"><button type="button" class="btn btn-light">Edytuj</button></a>
+                                        <a href="{{ route('AdminOrSuperEmployee.delete', ['idU' => $user->id_U]) }}"><button type="button" class="btn btn-danger">Usuń</button></a>
+                                        @endcan
 
                                     </div></td>
                             </tr>
