@@ -20,6 +20,12 @@ class EmailRepository
             ->first();
     }
 
+    public function findEmaill(int $id){
+            return $this->emailUsers
+                ->find($id)
+                ->first();
+    }
+
     public function update(int $id,array $params)
     {
        return $this->emailUsers

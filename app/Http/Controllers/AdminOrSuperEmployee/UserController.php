@@ -6,8 +6,10 @@ use App\Http\Requests\Admin\PostRequestEdit;
 use App\Http\Requests\Admin\StorePostRequestAddUser;
 use App\Models\EmailUsers;
 use App\Models\Positions;
+use App\Repository\EmailRepository;
 use App\Repository\UserRepository;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -43,7 +45,7 @@ class UserController
             'id_P'=>$request->position,
             'created_at'=>Carbon::now()
         ]);
-        return redirect('/user');
+        return redirect('/user')->with('success','Prawidłowo dodano użytkownika');
     }
 
 
@@ -82,16 +84,28 @@ class UserController
             'position'=>$request->position
         ];
         $this->repository->update($idU,$params);
-        return redirect('/user');
+        return redirect('/user')->with('success','Pomyślnie zaktualizowano użytkownika');
 
     }
 
 
-    public function delete():view
+    public function delete(int $id,EmailRepository $emailRepository):JsonResponse
     {
-        return view('AdminOrSuperEmployee.list',[
-            'users'=>$this->repository->all(auth::id())
-        ]);
+        try{
+            $user=$this->repository->get($id);
+            $email=$emailRepository->findEmaill($user->email_user);
+            $user->delete();
+            $email->delete();
+           return response()->json([
+               'status'=>'success',
+               'message'=>'Operacja wykonana pomyślnie'
+           ]);
+        }catch(\Exception $e){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'Wystąpił problem podczas wykonywania operacji'
+            ])->setStatusCode(500);
+        }
     }
 
 

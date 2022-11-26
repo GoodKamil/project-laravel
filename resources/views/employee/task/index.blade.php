@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$row->Title}}</h5>
                             <p class="card-text">{{$row->Description}}</p>
-                            <a href="{{route('employee.task.show',['id'=>$row->id_T])}}" class="btn btn-primary">Zobacz</a>
+                            <a  href="{{route('employee.task.show',['id'=>$row->id_T])}}" class="btn btn-primary">Zobacz</a>
                         </div>
                     </div>
                 @empty

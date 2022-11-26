@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <title>@yield('title')</title>
         <meta name="description" content=""/>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <script src="https://kit.fontawesome.com/5244237eec.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
        @vite(['resources/css/app.css']);

@@ -1,6 +1,11 @@
 @extends('layout.main')
 
 @section('content')
+    @if(Session::has('success'))
+        <div class="alert alert-success mt-2 mb-2 text-center" role="alert">
+            {{Session::get('success')}}
+        </div>
+    @endif
     <div class="card">
         @if(!empty($user))
             <h5 class="card-header">{{ $user->first_name.' '.$user->last_name }}</h5>

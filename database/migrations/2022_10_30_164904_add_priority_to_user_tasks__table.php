@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('user_tasks', function (Blueprint $table) {
-            //
+            $table->dropColumn('priority');
         });
     }
 };

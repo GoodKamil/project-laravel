@@ -23,6 +23,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['middleware'=>['auth']],function(){
+
+    Route::group(['middleware'=>['can:isAdmin']],function() {
+         Route::delete('/delete/{id}',[UserController::class,'delete']);
+    });
+
+
     Route::group(['middleware'=>['can:isAdminOrSuperEmployee']],function(){
         Route::get('/user',[UserController::class,'index'])
             ->name('AdminOrSuperEmployee.index');
@@ -40,6 +46,7 @@ Route::group(['middleware'=>['auth']],function(){
             ->name('AdminOrSuperEmployee.task.store');
         Route::get('/taskShow',[TaskController::class,'index'])
             ->name('AdminOrSuperEmployee.task.index');
+        Route::delete('/deleteTask/{id}',[TaskController::class,'delete']);
         Route::get('/taskUpdate/{idT}',[TaskController::class,'edit'])
             ->name('AdminOrSuperEmployee.task.edit');
         Route::post('/taskUpdate/{idT}',[TaskController::class,'update'])
@@ -47,6 +54,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/edit/{idU}',[UserController::class,'edit'])
             ->name('AdminOrSuperEmployee.edit');
     });
+
+
 
     Route::group(['middleware'=>['can:isSuperEmployee']],function() {
         Route::get('/delete', [UserController::class, 'delete'])

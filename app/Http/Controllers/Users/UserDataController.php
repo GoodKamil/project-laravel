@@ -42,14 +42,14 @@ class UserDataController extends Controller
     {
         $request->validated();
         $this->repositoryUserData->save(['id_U'=>auth::id(),...$this->getParams($request->all())]);
-        return redirect(route('users.data.show'));
+        return redirect(route('users.data.show'))->with('success','Pomyślnie dodano inforamcję o użytkowniku');
     }
 
     public function doUpdateDataUser(StorePostRequestUserData $request)
     {
         $request->validated();
         $this->repositoryUserData->update(auth::id(),$this->getParams($request->all()));
-        return redirect(route('users.data.show'));
+        return redirect(route('users.data.show'))->with('success','Pomyślnie zaktualizowano inforamcję o użytkowniku');
     }
 
     public function getParams(array $params)

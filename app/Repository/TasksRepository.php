@@ -19,7 +19,7 @@ class TasksRepository
     public function all()
     {
         return $this->tasksModel
-            ->with('users')
+            ->with(['users','send_task'])
             ->orderBy('created_at','desc')
             ->get();
     }
@@ -27,6 +27,7 @@ class TasksRepository
     public function userTasks(int $idUsera)
     {
         return $this->tasksModel
+            ->with('send_task')
             ->where('whoAdd',$idUsera)
             ->orderBy('created_at','desc')
             ->get();

@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::table('user_tasks', function (Blueprint $table) {
-            $table->integer('whoAdd')->nullable();
+            $table->unsignedBigInteger('send_id')->nullable();
+            $table->foreign('send_id')
+               ->references('id')
+               ->on('send_task')
+               ->onDelete('cascade');
         });
     }
 
@@ -26,7 +30,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('user_tasks', function (Blueprint $table) {
-            $table->dropColumn('whoAdd');
+            $table->dropColumn('send_id');
+            $table->dropForeign('send_id');
         });
     }
 };

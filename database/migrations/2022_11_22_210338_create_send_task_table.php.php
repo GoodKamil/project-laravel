@@ -15,9 +15,14 @@ return new class extends Migration
     {
        Schema::create('send_task',function(Blueprint $table){
            $table->id();
+           $table->unsignedBigInteger('task_id');
            $table->string('comment',150);
-           $table->string('fileName',100);
+           $table->string('fileName',100)->nullable();
            $table->timestamps();
+           $table->foreign('task_id')
+               ->references('id_T')
+               ->on('user_tasks')
+               ->onDelete('cascade');
        });
     }
 
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+       Schema::dropIfExists('send_task');
     }
 };

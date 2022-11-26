@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         @if(!empty($task))
-            <h5 class="card-header">Zadanie</h5>
+            <h5 class="card-header {{ (($task->Done) ? 'bg-success' : '') }}">Zadanie</h5>
             <div class="card-body">
                 <ul>
                     <li>Temat zadania: {{ $task->Title }}</li>
@@ -14,8 +14,17 @@
                     <li>Data utworzenia zadania: {{$task->created_at}}</li>
                     <li>Kto utworzył zadanie: {{$task->usersAdd[0]->first_name.' '.$task->usersAdd[0]->last_name}}</li>
                 </ul>
+                @if($task->isDone())
+                    <div style="border-top:1px solid grey;margin-bottom: 2rem;">
+                      <ul style="margin-top: 1rem;">
+                          <li>Zadanie wykonane: {{$task->send_task->created_at}}</li>
+                          <li>Komentarz do zadania: {{$task->send_task->comment}}</li>
+                          <li>Dodany plik do zadania: <a target="_bland" href="{{Storage::url('app/public/'.$task->send_task->fileName)}}">Plik_Zadanie</a></li>
+                      </ul>
+                    </div>
+                @endif
                 <a href="{{ route('employee.task.index') }}" class="btn btn-light">Powrót</a>
-                @if(!$task->Done)
+                @if(!$task->isDone())
                     <a href="#" class="btn btn-primary" id="showForm">Oddaj zadanie</a>
                 @endif
             </div>
@@ -25,7 +34,7 @@
     </div>
     <div class="card mt-5 {{($errors->any()) ?: 'display-form' }}" id="form">
         <div class="card-body">
-            <form action="{{route('employee.task.handOverTheTask')}}"  method="post">
+            <form action="{{route('employee.task.handOverTheTask')}}"  method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="idT" value="{{$task->id_T}}">
                 @error('idT') <div class="invalid-feedback">{{ $errors->get('idT')[0]}}</div>@enderror
@@ -49,11 +58,13 @@
             const form=document.getElementById('form');
             const showForm=document.getElementById('showForm');
 
-            showForm.addEventListener('click',function() {
-              if(form.classList.contains('display-form'))
-                  form.classList.remove('display-form');
-              else
-                  form.classList.add('display-form')
-            })
+            if(form && showForm) {
+                showForm.addEventListener('click', function () {
+                    if (form.classList.contains('display-form'))
+                        form.classList.remove('display-form');
+                    else
+                        form.classList.add('display-form')
+                })
+            }
         </script>
 @endsection
