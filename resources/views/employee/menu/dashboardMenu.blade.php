@@ -16,7 +16,7 @@
 <div class="sb-sidenav-menu-heading mt-3 color_link"><h5>Operacje:</h5></div>
 <div class="w-100 bacground_menu_home">
     <div class="d-sm-flex justify-content-start align-items-center">
-        <a class="nav-link pt-4 pb-4 mr-5 color_link" href="#">
+        <a class="nav-link pt-4 pb-4 mr-5 color_link" href="{{route("email.index")}}">
             <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
             Wyślij wiadomość
         </a>

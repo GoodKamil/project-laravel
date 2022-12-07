@@ -29,7 +29,7 @@
             <div class="sb-nav-link-icon"><i class="fas fa-tasks"></i></div>
             Dodaj zadanie
         </a>
-        <a class="nav-link pt-4 pb-4 mr-5 color_link" href="#">
+        <a class="nav-link pt-4 pb-4 mr-5 color_link" href="{{route("email.index")}}">
             <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
             Wyślij wiadomość
         </a>

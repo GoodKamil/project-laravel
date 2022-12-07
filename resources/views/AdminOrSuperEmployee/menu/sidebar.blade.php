@@ -26,7 +26,7 @@
     <div class="sb-nav-link-icon"><i class="fas fa-tasks"></i></div>
     Dodaj zadanie
 </a>
-<a class="nav-link" href="#">
+<a class="nav-link" href="{{route("email.index")}}">
     <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
     Wyślij wiadomość
 </a>

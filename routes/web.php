@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminOrSuperEmployee\TaskController;
 use App\Http\Controllers\AdminOrSuperEmployee\UserController;
+use App\Http\Controllers\Email\EmailController;
 use App\Http\Controllers\Users\UserDataController;
 use App\Http\Controllers\Employee\UserController as Employee;
 use App\Http\Controllers\Employee\TaskController as EmployeeTasks;
@@ -83,10 +84,15 @@ Route::group(['middleware'=>['auth']],function(){
         ->name('users.data.store');
     Route::get('/createUserDataShow',[UserDataController::class,'create'])
         ->name('users.data.createDataUser');
+    Route::get('/sendEmail',[EmailController::class,'index'])
+        ->name('email.index');
+    Route::post('/sendEmail',[EmailController::class,'send'])
+        ->name('email.send');
 
 
     Route::get('/', [MainPage::class,'__invoke'])
         ->name('home.mainPage');
+
 });
 
 
