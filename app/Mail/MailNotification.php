@@ -33,7 +33,10 @@ class MailNotification extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from:new Address('krawczakk356@gmail.com',$this->data['user']),
+            from:new Address($this->data['from'],$this->data['user']),
+            replyTo: [
+                new Address($this->data['from'],$this->data['user'])
+            ],
             subject: 'Wiadomość',
         );
     }

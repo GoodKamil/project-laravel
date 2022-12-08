@@ -2,18 +2,27 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
 use Illuminate\Support\Facades\Auth;
 
 class Users extends Authenticatable
 {
-    use HasFactory;
+
+    use HasFactory,Notifiable;
+
+
     protected $fillable = [
         'first_name', 'last_name', 'email_user', 'position','created_at','password'
     ];
     protected $primaryKey = 'id_U';
+
+
+
 
     public function positions()
     {

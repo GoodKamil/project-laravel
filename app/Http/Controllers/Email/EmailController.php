@@ -31,9 +31,14 @@ class EmailController extends Controller
     {
         $request->validated();
         $user=$this->repository->get($request->input('selectUser'));
-        $email=$user->email_users->email;
-        $nameUser="{$user->first_name} {$user->last_name}";
-        Mail::to($email)->send(new MailNotification(['email'=>$email,'user'=>$nameUser,...$request->all()]));
+        $userFrom=auth::user();
+        $params=[
+            'user'=>"{$userFrom?->first_name} {$userFrom?->last_name}",
+            'from'=>$userFrom?->email_users->email,
+            'title'=>$request->title,
+            'description'=>$request->description
+        ];
+        Mail::to($user->email_users->email)->send(new MailNotification($params));
         return redirect(route('home.mainPage'))->with('success','Pomyślnie wysłano wiadomość email');
 
     }
