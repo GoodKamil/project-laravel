@@ -418,7 +418,7 @@ h6,
 }
 
 .lead {
-    font-size: 1.25rem;
+    font-size: 1.5rem !important;
     font-weight: 300;
 }
 
@@ -34739,4 +34739,42 @@ body {
     -moz-animation: rotateHidden 2s  linear;
     -o-animation:rotateHidden 2s  linear;
 }
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+.h-custom {
+    height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+
+.display_dropdown
+{
+    display: none !important;
+}
+
+.dropdown-toggle::after
+{
+    /*display: none !important;*/
+}
+
+@media (max-width: 990px) {
+    .display_dropdown
+    {
+        display: block !important;
+    }
+
+    .dropdown-toggle::after
+    {
+        /*display: inline-block !important;*/
+    }
+}
+
 

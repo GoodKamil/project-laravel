@@ -10,7 +10,7 @@
         <div class="card-body">
                 <div class="d-lg-flex justify-content-start align-items-center flex-wrap" style="gap:15px">
                 @forelse($tasks as $row)
-                        <div id="card-{{$row->id_T}}" class="card {{($row->isDone()) ? 'border-success' : '' }}" style="width: 18rem;">
+                        <div id="card-{{$row->id_T}}" class="card mb-3 {{($row->isDone()) ? 'border-success' : '' }}" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">{{$row->Title}}</h5>
                                 <p class="card-text">{{$row->Description}}</p>

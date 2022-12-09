@@ -13,15 +13,13 @@
     </head>
     <body class="sb-nav-fixed">
 
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="{{ route('home.mainPage') }}"></a>
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark justify-content-between">
+            <a class="navbar-brand  w-auto" href="{{ route('home.mainPage') }}"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
-                <!-- Authentication Links -->
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
@@ -30,27 +28,23 @@
                     @endif
 
                     @if (Route::has('admin.checkEmail'))
-                        <li class="nav-item">
+                        <li class="nav-item mr-3">
                             <a class="nav-link" href="{{ route('admin.checkEmail') }}">{{ __('Rejestracja') }}</a>
                         </li>
                     @endif
                 @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <li class="nav-item dropdown mr-5 display_dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->first_name.' '.Auth::user()->last_name }}
 
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Wyloguj się') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+                            @can('isAdminOrSuperEmployee')
+                                @includeIf('AdminOrSuperEmployee.menu.dropdown')
+                            @else
+                                @includeIf('employee.menu.dropdown')
+                            @endcan
                         </div>
                     </li>
                 @endguest
@@ -70,9 +64,6 @@
                                 @endcan
                             </div>
                         </div>
-                        <div class="sb-sidenav-footer">
-                            Sidenav Footer
-                        </div>
                     @show
                 </nav>
             </div>
@@ -83,18 +74,8 @@
                         @yield('content')
                     </div>
                 </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Fluid footer</div>
-                            <div>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
             </div>
         </div>
-{{--       @vite(['resources/js/app.js'])--}}
         <script   src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

@@ -3,10 +3,10 @@
 @section('content')
     <div class="card">
         <h5 class="card-header">Twoje Zadania</h5>
-        <div class="card-body">
+        <div class="card-body ">
             <div class="d-lg-flex justify-content-start align-items-center flex-wrap" style="gap:15px">
                 @forelse($tasks as $row)
-                    <div class="card {{($row->priority) ? 'borderCard' : ''}}" style="width: 18rem;">
+                    <div class="card mb-3 {{($row->priority) ? 'borderCard' : ''}}" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">{{$row->Title}}</h5>
                             <p class="card-text">{{$row->Description}}</p>

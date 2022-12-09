@@ -1,28 +1,25 @@
 @extends('layout.main')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Sprawdzanie adresu e-mail') }}</div>
-
-                    <div class="card-body">
+    <section class="vh-100 overflow-hidden">
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form method="POST" action="{{route('auth.checkEmailIsExists')}}">
                             @csrf
-
-                            <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Adres-email') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('checkEmail') is-invalid @enderror" name="checkEmail" value="{{ old('checkEmail') }}" required autocomplete="on" autofocus>
-
-                                    @error('checkEmail')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+                            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                                <p class="lead fw-normal mb-0 me-3">Sprawdzanie adres e-mail</p>
+                            </div>
+                            <div class="divider d-flex align-items-center my-4">
+                            </div>
+                            <div class="mb-4 mt-4">
+                                <label for="name" class="form-label">{{ __('Adres-email') }}</label>
+                                <input id="name" type="text" class="form-control @error('checkEmail') is-invalid @enderror" name="checkEmail" value="{{ old('checkEmail') }}" required autocomplete="on" autofocus>
+                                @error('checkEmail')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
 
                             <div class="row mb-0">
@@ -33,9 +30,12 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                </div>
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                         class="img-fluid" alt="Sample image">
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection
