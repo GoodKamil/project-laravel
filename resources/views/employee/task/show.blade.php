@@ -14,17 +14,17 @@
                     <li>Data utworzenia zadania: {{$task->created_at}}</li>
                     <li>Kto utworzył zadanie: {{$task->usersAdd[0]->first_name.' '.$task->usersAdd[0]->last_name}}</li>
                 </ul>
-                @if($task->isDone())
+                @if($task->isSend())
                     <div style="border-top:1px solid grey;margin-bottom: 2rem;">
                       <ul style="margin-top: 1rem;">
                           <li>Zadanie wykonane: {{$task->send_task->created_at}}</li>
                           <li>Komentarz do zadania: {{$task->send_task->comment}}</li>
-                          <li>Dodany plik do zadania: <a target="_bland" href="{{Storage::url('app/public/'.$task->send_task->fileName)}}">Plik_Zadanie</a></li>
+                          <li>Dodany plik do zadania: <a target="_bland" href="{{route('task.download',['id'=>$task->id_T])}}">Plik_Zadanie</a></li>
                       </ul>
                     </div>
                 @endif
                 <a href="{{ route('employee.task.index') }}" class="btn btn-light">Powrót</a>
-                @if(!$task->isDone())
+                @if(!$task->isSend())
                     <a href="#" class="btn btn-primary" id="showForm">Oddaj zadanie</a>
                 @endif
             </div>

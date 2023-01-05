@@ -14,9 +14,10 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{$row->Title}}</h5>
                                 <p class="card-text">{{$row->Description}}</p>
-                                @if(!$row->isDone())
+                                @if(!$row->isSend())
                                 <a href="{{route('AdminOrSuperEmployee.task.edit',['idT'=>$row->id_T])}}" class="btn btn-primary">Edytuj</a>
                                 @endif
+                                <a href="{{route('AdminOrSuperEmployee.task.show',['idT'=>$row->id_T])}}" class="btn btn-info">Zobacz</a>
                                 <a data-id="{{$row->id_T}}"  href="#" class="btn btn-danger delete_method">Usuń</a>
                             </div>
                         </div>

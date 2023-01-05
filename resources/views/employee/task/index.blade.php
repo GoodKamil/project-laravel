@@ -18,5 +18,10 @@
                 @endforelse
             </div>
         </div>
+        @if(Session::has('success'))
+            <div class="alert alert-success mt-2 mb-2 text-center" role="alert">
+                {{Session::get('success')}}
+            </div>
+        @endif
     </div>
 @endsection

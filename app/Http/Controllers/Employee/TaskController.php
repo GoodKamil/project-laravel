@@ -46,7 +46,7 @@ class TaskController extends Controller
        ];
       $sendTaskRepository->save($params);
       $this->tasksRepository->update($request->input('idT'),['send_id'=>$sendTaskRepository->getId(),'Done'=>1]);
-      return redirect(route('employee.task.index'));
+      return redirect(route('employee.task.index'))->with('success','Pomyślnie dodano informację do zadania');
     }
 
 

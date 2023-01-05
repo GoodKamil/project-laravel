@@ -13,9 +13,14 @@
             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
             Twój profil
         </a>
+        @can('isSuperEmployee')
+            <a class=" nav-link pt-4 pb-4 color_link" href="{{route('employee.task.index')}}">
+                <div class="sb-nav-link-icon"><i class="fas fa-clipboard"></i></div>
+                Twoje Zadania
+            </a>
+        @endcan
     </div>
 </div>
-
 
 <div class="sb-sidenav-menu-heading mt-3 color_link"><h5>Operacje:</h5></div>
 <div class="w-100 bacground_menu_home">

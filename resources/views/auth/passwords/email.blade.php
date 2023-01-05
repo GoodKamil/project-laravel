@@ -7,7 +7,7 @@
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     @if (session('status'))
                         <div class="alert alert-success mb-4" role="alert">
-                            {{ session('status') }}
+                            Na podany adres otrzymasz maila z linkiem, umożliwiającym zmianę hasła.
                         </div>
                     @endif
 
@@ -38,7 +38,7 @@
                     </form>
                 </div>
                 <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                    <img src="{{Storage::url('img/draw2.webp')}}"
                          class="img-fluid" alt="Sample image">
                 </div>
             </div>

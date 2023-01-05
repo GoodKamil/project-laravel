@@ -29,8 +29,12 @@ class Tasks extends Model
         return $this->hasOne(SendTask::class,'id','send_id');
     }
 
-    public function isDone()
+    public function isSend()
     {
         return !is_null($this->send_task);
+    }
+    public function isDone()
+    {
+        return (int)$this->Done===1;
     }
 }

@@ -29,6 +29,7 @@ class TasksRepository
         return $this->tasksModel
             ->with('send_task')
             ->where('whoAdd',$idUsera)
+            ->where('id_U','!=',$idUsera)
             ->orderBy('created_at','desc')
             ->get();
     }
@@ -57,7 +58,7 @@ class TasksRepository
     }
     public function update(int $id,array $params)
     {
-        $this->tasksModel
+      return  $this->tasksModel
             ->find($id)
             ->update($params);
     }

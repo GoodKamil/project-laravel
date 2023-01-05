@@ -46,6 +46,32 @@ class TaskController extends Controller
     );
     }
 
+    public function show(int $id)
+    {
+//
+        return view('AdminOrSuperEmployee.task.show',[
+            'task'=>$this->tasksRepository->get($id),
+        ]);
+    }
+
+    public function download(int $id)
+    {
+        $task=$this->tasksRepository->get($id);
+        if(!is_null($task) && Storage::disk('public')->exists($task->send_task->fileName)) {
+            return response()->download(public_path('storage/' . $task->send_task->fileName));
+        }
+
+        return redirect()->back()->with('error','Plik w danym zadaniu nie istnieje');
+    }
+
+    public function doneTask(int $id)
+    {
+
+        $this->tasksRepository->update($id,['Done'=>'1']);
+        return redirect()->back()->with('success','Pomyślnie zaktualizowano zadanie');
+    }
+
+
     public function getUsers()
     {
         if(Auth::user()?->isAdmin())
@@ -78,9 +104,8 @@ class TaskController extends Controller
 
     public function helperMethod(StorePostRequestAddTask  $request):array
     {
-        $request->except(['_token']);
         $request->validated();
-       return [
+        return [
             'id_U'=>$request->selectUser,
             'Title'=>$request->title,
             'Description'=>$request->description,

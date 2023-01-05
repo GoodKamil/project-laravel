@@ -50,10 +50,14 @@ Route::group(['middleware'=>['auth']],function(){
         Route::delete('/deleteTask/{id}',[TaskController::class,'delete']);
         Route::get('/taskUpdate/{idT}',[TaskController::class,'edit'])
             ->name('AdminOrSuperEmployee.task.edit');
+        Route::get('/taskShow/{idT}',[TaskController::class,'show'])
+            ->name('AdminOrSuperEmployee.task.show');
         Route::post('/taskUpdate/{idT}',[TaskController::class,'update'])
             ->name('AdminOrSuperEmployee.task.update');
         Route::get('/edit/{idU}',[UserController::class,'edit'])
             ->name('AdminOrSuperEmployee.edit');
+        Route::post('/taskDone/{id}',[TaskController::class,'doneTask'])
+            ->name('AdminOrSuperEmployee.task.doneTask');
     });
 
 
@@ -63,15 +67,14 @@ Route::group(['middleware'=>['auth']],function(){
             ->name('AdminOrSuperEmployee.delete');
     });
 
-
-   Route::group(['middleware'=>['can:isEmployee']],function(){
-      Route::get('/userTasks',[EmployeeTasks::class,'index'])
-          ->name('employee.task.index');
-       Route::get('/showTask/{id}',[EmployeeTasks::class,'show'])
-           ->name('employee.task.show');
-       Route::post('/handOverTheTask',[EmployeeTasks::class,'handOverTheTask'])
-           ->name('employee.task.handOverTheTask');
-   });
+    Route::group(['middleware'=>['can:isSuperEmployeeOrEmployee']],function() {
+        Route::get('/userTasks',[EmployeeTasks::class,'index'])
+            ->name('employee.task.index');
+        Route::get('/showTask/{id}',[EmployeeTasks::class,'show'])
+            ->name('employee.task.show');
+        Route::post('/handOverTheTask',[EmployeeTasks::class,'handOverTheTask'])
+            ->name('employee.task.handOverTheTask');
+    });
 
 
     Route::get('/showProfile',[UserDataController::class,'show'])
@@ -88,6 +91,8 @@ Route::group(['middleware'=>['auth']],function(){
         ->name('email.index');
     Route::post('/sendEmail',[EmailController::class,'send'])
         ->name('email.send');
+    Route::get('/download/{id}',[TaskController::class,'download'])
+        ->name('task.download');
 
 
     Route::get('/', [MainPage::class,'__invoke'])

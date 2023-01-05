@@ -10,6 +10,11 @@
 <a class="dropdown-item" href="{{route('users.data.show')}}">
     {{ __('Twój profil') }}
 </a>
+@can('isSuperEmployee')
+    <a class="dropdown-item" href="{{route('employee.task.index')}}">
+        {{ __('Twoje Zadania') }}
+    </a>
+@endcan
 <a class="dropdown-item" href="{{route('AdminOrSuperEmployee.addUser')}}">
     {{ __('Dodaj użytkownika') }}
 </a>

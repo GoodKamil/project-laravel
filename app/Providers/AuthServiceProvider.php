@@ -30,7 +30,8 @@ class AuthServiceProvider extends ServiceProvider
         $this->definedUserRoleGate('isAdmin',UserRole::ADMIN);
         $this->definedUserRoleGate('isSuperEmployee',UserRole::SUPEREMPLOYEE);
         $this->definedUserRoleGate('isEmployee',UserRole::EMPLOYEE);
-        $this->definedUserRoleGateTwoUsers();
+        $this->definedUserRoleGateTwoUsers('isAdminOrSuperEmployee',[2,3]);
+        $this->definedUserRoleGateTwoUsers('isSuperEmployeeOrEmployee',[1,2]);
     }
 
     private function definedUserRoleGate(string $name,int $role)
@@ -40,10 +41,10 @@ class AuthServiceProvider extends ServiceProvider
          });
     }
 
-    private function definedUserRoleGateTwoUsers()
+    private function definedUserRoleGateTwoUsers(string $name,array $role)
     {
-        Gate::define('isAdminOrSuperEmployee',function (Users $user){
-            return in_array($user->positions->role, [2, 3], true);
+        Gate::define($name,function (Users $user) use ($role){
+            return in_array($user->positions->role, $role, true);
         });
     }
 }
